@@ -15,6 +15,7 @@ Item {
 	property alias cfg_refreshRate: refreshRate.value
 	property alias cfg_pricePrefix: pricePrefix.text
 	property alias cfg_priceSuffix: priceSuffix.text
+	property alias cfg_showUpdatingSpinner: showUpdatingSpinner.checked
 	property alias cfg_decPlaces: decPlaces.value
 	property alias cfg_controlDecimals: controlDecimals.checked
 	property alias cfg_showPricePrefix: showPricePrefix.checked
@@ -173,7 +174,7 @@ Item {
 		SpinBox {
 			id: refreshRate
 			Layout.minimumWidth: theme.mSize(theme.defaultFont).width * 18
-			suffix: i18n(" minutes")
+			suffix: i18n(" seconds")
 			minimumValue: 1
 		}
 		
@@ -228,6 +229,15 @@ Item {
 		TextField {
 			id: priceSuffix
 			Layout.minimumWidth: theme.mSize(theme.defaultFont).width * 12
+		}
+
+		CheckBox {
+			id: showUpdatingSpinner
+			text: i18n("Show Updating spinner")
+		}
+
+		Label {
+			text: i18n("(Disabled: Don't show updating spinner)")
 		}
 		
 		CheckBox {

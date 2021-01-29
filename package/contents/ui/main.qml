@@ -18,6 +18,7 @@ Item {
 	property string cryptoRateC: '...'
 	property bool showPricePrefix: plasmoid.configuration.showPricePrefix
 	property bool showPriceSuffix: plasmoid.configuration.showPriceSuffix
+	property bool showUpdatingSpinner: plasmoid.configuration.showUpdatingSpinner
 	property bool showIcon: plasmoid.configuration.showIcon
 	property bool showText: plasmoid.configuration.showText
 	property bool controlDecimals: plasmoid.configuration.controlDecimals
@@ -109,7 +110,7 @@ Item {
 			height: parent.height
 			anchors.horizontalCenter: root.showIcon ? cryptoIcon.horizontalCenter : cryptoValue.horizontalCenter
 			running: updatingRate
-			visible: updatingRate
+			visible: showUpdatingSpinner && updatingRate
 		}
 		
 		Image {
@@ -122,7 +123,7 @@ Item {
 			anchors.leftMargin: root.showText ? parent.height * 0.05 : 0
 			source: "../images/blank.svg"
 			visible: root.showIcon
-			opacity: root.useCustomIcon ? 0.0 : root.updatingRate ? 0.2 : mouseAreaIcon.containsMouse ? 0.8 : 1.0
+			opacity: root.useCustomIcon ? 0.0 : showUpdatingSpinner && root.updatingRate ? 0.2 : mouseAreaIcon.containsMouse ? 0.8 : 1.0
 		}
 		
 		PlasmaCore.IconItem {
@@ -147,7 +148,7 @@ Item {
 			horizontalAlignment: root.showIcon ? Text.AlignLeft : Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			visible: root.showText
-			opacity: root.updatingRate ? 0.2 : mouseAreaValue.containsMouse ? 0.8 : 1.0
+			opacity: showUpdatingSpinner && root.updatingRate ? 0.2 : mouseAreaValue.containsMouse ? 0.8 : 1.0
 			fontSizeMode: Text.Fit
 			minimumPixelSize: cryptoIcon.width * 0.7
 			font.pixelSize: 72
@@ -260,7 +261,7 @@ Item {
 
 	Timer {
 		id: cryptoTimer
-		interval: plasmoid.configuration.refreshRate * 60 * 1000
+		interval: plasmoid.configuration.refreshRate * 1000
 		running: true
 		repeat: true
 		triggeredOnStart: true

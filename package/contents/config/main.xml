@@ -37,6 +37,10 @@
       <label>Show suffix</label>
       <default>false</default>
     </entry>
+    <entry name="showUpdatingSpinner" type="bool">
+      <label>Show updating spinner</label>
+      <default>true</default>
+    </entry>
     <entry name="showText" type="bool">
       <label>Show text</label>
       <default>true</default>
